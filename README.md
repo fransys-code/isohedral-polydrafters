@@ -9,7 +9,7 @@ numbers for polyominoes, polyhexes, polyiamonds and polykites; the values 6 and 
 
 This repository reports isohedral numbers for **polydrafters** (unions of 30°–60°–90° triangles of
 the kisrhombille grid, the triangles obtained by cutting each equilateral triangle of the triangular grid into six), a grid not
-covered by those tables. Among the holeless free polydrafters with at most 22 drafters:
+covered by those tables. Among the holeless free polydrafters with at most 24 drafters:
 
 - one **20-drafter has isohedral number 9**;
 - one **16-drafter** and six **20-drafters** have isohedral number 6. Two of these 20-drafters are
@@ -18,7 +18,8 @@ covered by those tables. Among the holeless free polydrafters with at most 22 dr
   20-drafter of number 9 and five shapes of number 6 (the 16-drafter and four 20-drafters), none of
   which is a polykite;
 - all other polydrafters in that range that tile periodically have isohedral number at most 4;
-- no shape of isohedral number 7 was found.
+- no shape of isohedral number 7 was found; in particular, among the 24-drafters (194 million
+  shapes, 1,211 candidates) the largest isohedral number is 4, reached by a single shape.
 
 All statements are for tilings whose tiles are aligned with one common drafter grid (the convention
 Myers uses for polykites).
@@ -53,7 +54,11 @@ Figures (French / English): https://totocaedres.fransys.io/pistes/isoedrique-7/n
 
   Every map is written `[a, b, c, d, e, f]` for `(x, y) ↦ (a x + b y + c, d x + e y + f)` in grid
   coordinates. The tiling is the set of images of the listed tiles under G and L.
-- `results/shapes.txt` — the same eight shapes in the input format of `iso` (`drafter x y x y …`).
+- `results/drafter24_isohedral_numbers.csv` — the 1,211 candidate 24-drafters, one per line:
+  isohedral number, then the cells (`x y x y …`, same coordinates).
+- `results/drafter24_k4_witness.jsonl` — the 24-drafter of isohedral number 4 (`D24-k4`) and its
+  witness, in the format of `witnesses.jsonl` (without `union_of_kites`).
+- `results/shapes.txt` — the eight shapes of `witnesses.jsonl` in the input format of `iso` (`drafter x y x y …`).
 - `results/drafter_isohedral_numbers.csv` — for each size, the number of candidate shapes and how
   many have each isohedral number; last column: shapes with no periodic grid-aligned tiling with
   at most 12 classes.
@@ -71,18 +76,22 @@ Figures (French / English): https://totocaedres.fransys.io/pistes/isoedrique-7/n
 | `D20-k6-a` … `D20-k6-d` | 20 | **6** | 6, 1 | no |
 | `D20-k6-e`, `D20-k6-f` | 20 | 6 | 6, 1 | yes (Myers' two 10-kites) |
 
-Candidate shapes: the 266 holeless free polydrafters with at most 22 drafters that the Heesch census
+Candidate shapes: the 1,477 holeless free polydrafters with at most 24 drafters that the Heesch census
 (see [heesch-polykites](https://github.com/fransys-code/heesch-polykites)) left unclassified, that is,
-neither isohedral tilers nor non-tilers with a known finite Heesch number: the 262 shapes counted
-as inconclusive in its `census.csv` for these sizes, plus 4 shapes on which the classification
-timed out (one 16-drafter and three 20-drafters). Their isohedral numbers:
+neither isohedral tilers nor non-tilers with a known finite Heesch number: the 1,472 shapes counted
+as inconclusive in its `census.csv` for these sizes, plus 5 shapes on which the classification
+timed out (one 16-drafter, three 20-drafters and one 24-drafter). Their isohedral numbers:
 
 | Isohedral number | 2 | 3 | 4 | 6 | 9 | none up to 12 |
 |---|---|---|---|---|---|---|
-| Shapes | 127 | 128 | 1 | 7 | 1 | 2 |
+| Shapes | 962 | 503 | 2 | 7 | 1 | 2 |
 
 The two shapes with no periodic tiling with at most 12 classes are a 16-drafter and a 20-drafter
 that are unions of 8 and 10 kites (the sizes of the aperiodic "hat" and "turtle" polykites).
+
+The 1,211 candidates of size 24 (1,210 inconclusive, 1 timed out) all tile periodically: 835 have
+isohedral number 2, 375 have number 3 and one has number 4. Their 1,211 witness tilings passed
+`verify_witnesses.py`; only the witness of the shape of number 4 is published here.
 
 ## Method
 
